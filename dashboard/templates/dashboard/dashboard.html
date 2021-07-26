@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>The future dashboard goes here</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}Students{% endblock %}
+
+{% block content %}
+    <ul>
+        {% for detail in StudentDetails %}
+            <li>
+                {{ detail.student }}
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

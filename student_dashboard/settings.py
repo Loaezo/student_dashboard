@@ -35,7 +35,6 @@ THIRD_APPS = [
 
 LOCAL_APPS = [
     'dashboard',
-    'login',
 ]
 INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THIRD_APPS
 
@@ -138,3 +137,5 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 if config('DJANGO_PRODUCTION_ENV', default=False, cast=bool):
     from .settings_production import *
+
+LOGIN_URL = '/login/'

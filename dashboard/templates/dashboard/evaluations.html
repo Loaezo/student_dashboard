@@ -1,10 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>This is where the grades will be</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block title %}Evaluations{% endblock %}
+
+{% block content %}
+    <div class="welcome message" align="center">
+        <h1>Welcome to your dashboard!</h1>
+        <a href="{% url 'students' %}">Home</a>
+    </div>
+    <div align="center">
+        <p>
+            Here are your current grades, arranged by subject:
+        </p>
+        <h2>Grades</h2>
+        <ul>
+            {% for detail in StudentDetails %}
+                <li>
+                    {{ detail.student }} {{ detail.subject }} {{ detail.grade }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
