@@ -2,8 +2,6 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from dashboard.models import StudentDetails
-from django.contrib.auth.models import User
-from django.db.utils import IntegrityError
 from dashboard.forms import RegisterForm
 
 
@@ -51,25 +49,3 @@ def login_view(request):
 def evaluations(request):
     return render(request, 'dashboard/evaluations.html',
                   {'StudentDetails': StudentDetails.objects.all()})
-
-
-def signup_view(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        password_confirmation = request.POST['password_confirmation']
-
-        if password != password_confirmation:
-            return render(request, 'dashboard/signup.html', {'error': 'The passwords entered do not match'})
-
-        try:
-            user = User.objects.create_user(username=username, password=password)
-        except IntegrityError:
-            return render(request, 'dashboard/signup.html', {'error': 'The username is already taken'})
-        user.first_name = request.POST['first_name']
-        user.last_name = request.POST['last_name']
-        user.email = request.POST['email']
-        user.save()
-
-        return redirect('login')
-    return render(request, 'dashboard/signup.html')
